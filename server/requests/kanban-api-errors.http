@@ -1,0 +1,47 @@
+### Crear tarea sin texto (400)
+POST {{apiBase}}/tareas
+Content-Type: application/json
+
+{
+  "texto": " ",
+  "estado": "pendiente",
+  "prioridad": "alta",
+  "categoria": "trabajo",
+  "fechaVencimiento": null
+}
+
+### Crear tarea con estado invalido (400)
+POST {{apiBase}}/tareas
+Content-Type: application/json
+
+{
+  "texto": "Estado invalido",
+  "estado": "en-proceso",
+  "prioridad": "media",
+  "categoria": "trabajo",
+  "fechaVencimiento": null
+}
+
+### Obtener tarea inexistente (404)
+GET {{apiBase}}/tareas/999999
+
+### Cambiar estado con body vacio (400)
+PATCH {{apiBase}}/tareas/1/estado
+Content-Type: application/json
+
+{
+  "estado": null
+}
+
+### Actualizar tarea inexistente (404)
+PUT {{apiBase}}/tareas/999999
+Content-Type: application/json
+
+{
+  "texto": "No existe",
+  "estado": "pendiente",
+  "prioridad": "baja",
+  "categoria": "otros",
+  "fechaVencimiento": null
+}
+

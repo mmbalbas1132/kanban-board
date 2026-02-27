@@ -1,0 +1,83 @@
+# Compiled class files
+*.class
+*.jar
+*.war
+*.ear
+
+# Target directory (Maven build output)
+target/
+
+# Log files
+*.log
+logs/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# NetBeans
+nbproject/
+nb-configuration.xml
+
+# VS Code
+.vscode/
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.properties
+!.mvn/wrapper/maven-wrapper.properties
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Environment variables and sensitive data
+.env
+.env.local
+.env.*.local
+
+# Application properties with sensitive data
+# IMPORTANTE: Si application.yaml contiene contraseñas, descomenta la siguiente línea:
+# src/main/resources/application.yaml
+# src/main/resources/application.properties
+# O mejor aún, usa application-local.yaml para configuración local
+src/main/resources/application-local.yaml
+src/main/resources/application-local.properties
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# Package files
+*.nar
+
+# Virtual machine crash logs
+hs_err_pid*
+replay_pid*
+
+# Spring Boot DevTools
+.spring-boot-devtools.properties
+
+# Node modules (if you integrate frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build artifacts
+build/
+dist/
+

@@ -1,0 +1,26 @@
+﻿# ============================================
+# GITIGNORE PARA PROYECTO KANBAN (Full Stack)
+# ============================================
+# ==================== IDE ====================
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.DS_Store
+Thumbs.db
+# ==================== BACKEND (Spring Boot) ====================
+server/target/
+server/.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+*.log
+# ==================== FRONTEND ====================
+node_modules/
+dist/
+build/
+# ==================== CONFIGURACIÓN SENSIBLE ====================
+.env
+.env.local
+server/src/main/resources/application-local.yaml

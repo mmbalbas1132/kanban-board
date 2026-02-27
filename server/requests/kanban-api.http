@@ -1,0 +1,49 @@
+### Crear tarea
+POST {{apiBase}}/tareas
+Content-Type: application/json
+
+{
+  "texto": "Configurar MariaDB",
+  "estado": "pendiente",
+  "prioridad": "alta",
+  "categoria": "trabajo",
+  "fechaVencimiento": "2026-03-15T23:59:59"
+}
+
+### Listar todas
+GET {{apiBase}}/tareas
+
+### Obtener por id
+GET {{apiBase}}/tareas/1
+
+### Actualizar tarea completa
+PUT {{apiBase}}/tareas/1
+Content-Type: application/json
+
+{
+  "texto": "Configurar MariaDB (ok)",
+  "estado": "en-curso",
+  "prioridad": "media",
+  "categoria": "trabajo",
+  "fechaVencimiento": null
+}
+
+### Cambiar solo estado
+PATCH {{apiBase}}/tareas/1/estado
+Content-Type: application/json
+
+{
+  "estado": "completada"
+}
+
+### Filtrar por estado
+GET {{apiBase}}/tareas/estado/pendiente
+
+### Buscar por texto
+GET {{apiBase}}/tareas/buscar?texto=MariaDB
+
+### Eliminar una tarea
+DELETE {{apiBase}}/tareas/1
+
+### Eliminar todas las completadas
+DELETE {{apiBase}}/tareas/completadas
