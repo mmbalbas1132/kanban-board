@@ -1,6 +1,34 @@
 # 📋 Tablero Kanban - Gestión de Tareas
 
-Una aplicación web moderna de gestión de tareas utilizando el método Kanban, con soporte para prioridades, modo oscuro y drag & drop.
+Una aplicación web moderna de gestión de tareas utilizando el método Kanban, construida con **Spring Boot** (Backend) e integrada con HTML5, CSS3 y JavaScript vanilla (Frontend).
+
+**🔗 Repositorio GitHub:** [mmbalbas1132/kanban-board](https://github.com/mmbalbas1132/kanban-board)
+
+---
+
+## 📂 Estructura del Proyecto
+
+```
+kanban-board/
+└── server/                          # Backend + Frontend integrado
+    ├── pom.xml                      # Configuración Maven
+    ├── src/
+    │   └── main/
+    │       ├── java/com/kanban/     # Código Java (Spring Boot)
+    │       │   ├── KanbanServerApplication.java
+    │       │   ├── controller/      # Controladores REST
+    │       │   ├── service/         # Lógica de negocio
+    │       │   ├── repository/      # Acceso a datos
+    │       │   ├── model/           # Entidades JPA
+    │       │   └── dto/             # Data Transfer Objects
+    │       └── resources/
+    │           ├── application.yaml # Configuración Spring
+    │           ├── static/          # Frontend estático (CSS, JS)
+    │           │   ├── css/
+    │           │   └── js/
+    │           └── templates/       # HTML templates
+    └── sql/                         # Scripts SQL para base de datos
+```
 
 ---
 
@@ -74,23 +102,78 @@ Una aplicación web moderna de gestión de tareas utilizando el método Kanban, 
 
 ---
 
-## 🚀 Cómo Usar
+## 🚀 Instalación y Uso
 
-### 1️⃣ Abrir la Aplicación
+### ✅ Requisitos Previos
 
-Abre el archivo `index.html` en tu navegador web favorito:
-- Haz doble clic en `index.html`
-- O arrastra el archivo al navegador
-- O desde WebStorm: clic derecho → "Open in Browser"
+- **Java 11+** instalado
+- **Maven 3.6+** instalado
+- Base de datos **MySQL 8.0+** (opcional, puede usar H2 en memoria)
 
-### 2️⃣ Crear una Tarea
+### 1️⃣ Clonar el Repositorio
 
-1. Escribe el texto de la tarea en el campo de entrada
-2. Selecciona la prioridad (Baja, Media o Alta)
-3. **NUEVO:** Selecciona una categoría (opcional)
-4. **NUEVO:** Asigna una fecha de vencimiento (opcional)
-5. Haz clic en **"+ Agregar"** o presiona **Enter**
-6. La tarea aparecerá en la columna "Pendiente"
+```bash
+git clone https://github.com/mmbalbas1132/kanban-board.git
+cd kanban-board/server
+```
+
+### 2️⃣ Configurar la Base de Datos
+
+Opción A: Usar H2 en memoria (por defecto)
+- No requiere configuración adicional
+- Perfecta para desarrollo y pruebas
+
+Opción B: Usar MySQL
+1. Crea una base de datos:
+   ```sql
+   CREATE DATABASE kanban_db;
+   ```
+2. Edita `src/main/resources/application.yaml`:
+   ```yaml
+   spring:
+     datasource:
+       url: jdbc:mysql://localhost:3306/kanban_db
+       username: root
+       password: tu_password
+   ```
+
+### 3️⃣ Compilar y Ejecutar
+
+```bash
+# Compilar el proyecto
+mvn clean package
+
+# Ejecutar el servidor
+mvn spring-boot:run
+# O
+java -jar target/kanban-server-0.1.0.jar
+```
+
+El servidor estará disponible en: **http://localhost:8080**
+
+### 4️⃣ Acceder a la Aplicación
+
+1. Abre tu navegador
+2. Ve a: `http://localhost:8080`
+3. ¡Comienza a gestionar tus tareas!
+
+### 5️⃣ API REST Disponible
+
+Puedes interactuar con la API directamente:
+
+**Obtener todas las tareas:**
+```bash
+curl http://localhost:8080/api/tareas
+```
+
+**Crear una tarea:**
+```bash
+curl -X POST http://localhost:8080/api/tareas \
+  -H "Content-Type: application/json" \
+  -d '{"titulo":"Mi tarea","prioridad":"ALTA"}'
+```
+
+Para más endpoints, consulta `server/requests/kanban-api.http`
 
 ### 3️⃣ Buscar y Filtrar Tareas
 
@@ -188,22 +271,7 @@ En la parte superior verás tres contadores:
 - **Enter**: Agregar tarea rápidamente
 - **Drag & Drop**: Mover tareas visualmente
 
----
 
-## 🛠️ Estructura del Proyecto
-
-```
-lista_de_tareas/
-│
-├── index.html          # Estructura HTML
-├── styles.css          # Estilos y tema oscuro
-├── script.js           # Lógica de la aplicación
-├── package.json        # Configuración del proyecto
-├── README.md           # Este archivo
-└── GUIA_CHAT.md        # Guía de comandos de Copilot
-```
-
----
 
 ## 🎨 Personalización
 
@@ -229,27 +297,34 @@ Edita las variables CSS en `styles.css`:
 
 ## 💾 Almacenamiento
 
-- **Persistencia Local**: Todas las tareas se guardan automáticamente en `localStorage`
-- **Tema**: Tu preferencia de tema se guarda
-- **Sin Servidor**: Todo funciona offline en tu navegador
+- **Base de Datos**: Todas las tareas se guardan en MySQL (o H2 en desarrollo)
+- **Persistencia Permanente**: Los datos persisten entre sesiones
+- **Sincronización**: La UI se actualiza automáticamente con cambios en el servidor
 
 ### Datos Guardados:
-- Texto de las tareas
-- Estado (pendiente/en-curso/completada)
+- Título de las tareas
+- Estado (Pendiente/En Curso/Completada)
 - Prioridad
-- **Categoría**
-- **Fecha de vencimiento**
+- Categoría
+- Fecha de vencimiento
 - Fecha de creación
-- Preferencia de tema
+- Fecha de última modificación
 
 ---
 
 ## 🔧 Tecnologías Utilizadas
 
+### Backend
+- **Spring Boot 3.x**: Framework web Java
+- **Spring Data JPA**: Acceso a datos
+- **MySQL/H2**: Base de datos
+- **Maven**: Gestor de dependencias
+
+### Frontend
 - **HTML5**: Estructura semántica
 - **CSS3**: Variables CSS, Grid, Flexbox, animaciones
-- **JavaScript (ES6+)**: Funciones modernas, localStorage, Notification API
-- **Sin dependencias**: No requiere librerías externas
+- **JavaScript (ES6+)**: Funciones modernas, DOM APIs
+- **Sin dependencias frontend**: No requiere librerías externas
 
 ---
 
@@ -270,40 +345,71 @@ Edita las variables CSS en `styles.css`:
 
 ## 🐛 Solución de Problemas
 
-### Las tareas no se guardan:
-- Verifica que tu navegador permita localStorage
-- No uses modo incógnito (no guarda datos)
+### El servidor no inicia
+- Verifica que Java 11+ está instalado: `java -version`
+- Verifica que Maven está instalado: `mvn -version`
+- Comprueba que el puerto 8080 no está en uso: `netstat -an | find ":8080"`
 
-### El drag and drop no funciona:
-- Asegúrate de usar un navegador moderno
-- Intenta usar los botones de movimiento
+### Error de conexión a base de datos
+- Si usas MySQL, verifica que el servicio está corriendo
+- Comprueba las credenciales en `application.yaml`
+- Intenta usar H2 en memoria (configuración por defecto)
 
-### La aplicación no carga:
-- Verifica que los 3 archivos estén en la misma carpeta
+### La aplicación no carga en el navegador
+- Verifica que el servidor está corriendo: `mvn spring-boot:run`
+- Intenta acceder a `http://localhost:8080`
 - Abre la consola del navegador (F12) para ver errores
+- Verifica CORS está correctamente configurado en `CorsConfig.java`
+
+### Problemas con la API REST
+- Consulta `server/requests/kanban-api.http` para ejemplos
+- Usa una herramienta como Postman o REST Client para probar
+- Revisa los logs del servidor para errores
 
 ---
 
 ## 📝 Notas para Desarrolladores
 
-### Documentación del Código:
-- Todo el JavaScript está documentado con **JSDoc**
-- Funciones organizadas por categorías
-- Código optimizado para evitar re-renders
+### Estructura del Backend
 
-### Características Técnicas:
-- **Validación de duplicados**: Compara texto normalizado
-- **Escape HTML**: Prevención de XSS
-- **Fragment DOM**: Mejora de rendimiento
-- **Event Delegation**: Menos listeners, mejor rendimiento
+**Controllers** (`controller/`)
+- `TareaController.java`: Endpoints REST para gestión de tareas
+- Maneja peticiones HTTP y retorna JSON
 
-### Ampliar la Aplicación:
-```javascript
-// Ejemplo: Agregar más estados
-function cambiarEstado(id, nuevoEstado) {
-    // La función ya soporta cualquier estado
-}
-```
+**Services** (`service/`)
+- `TareaService.java`: Lógica de negocio
+- Validaciones y reglas de la aplicación
+
+**Models** (`model/`)
+- `Tarea.java`: Entidad JPA mapeada a la tabla tareas
+- `Estado.java`: Enum para estados (PENDIENTE, EN_CURSO, COMPLETADA)
+- `Prioridad.java`: Enum para prioridades (ALTA, MEDIA, BAJA)
+
+**DTOs** (`dto/`)
+- `TareaRequest.java`: Datos recibidos del cliente
+- `TareaResponse.java`: Datos enviados al cliente
+- `EstadoUpdateRequest.java`: Actualización de estado
+
+**Repository** (`repository/`)
+- `TareaRepository.java`: Interface JPA para acceso a datos
+- Queries personalizadas si es necesario
+
+**Config** (`config/`)
+- `CorsConfig.java`: Configuración CORS para permitir requests desde el frontend
+
+### Testing
+
+Para probar la API, usa:
+- **Postman**: Importa `server/requests/kanban-api.http`
+- **VS Code REST Client**: Instala extensión y abre `server/requests/kanban-api.http`
+- **cURL**: Usa comandos desde terminal
+
+### Desarrollo
+
+1. Abre el proyecto en tu IDE favorito (IntelliJ IDEA, VS Code, etc.)
+2. Descarga dependencias: `mvn clean install`
+3. Ejecuta: `mvn spring-boot:run`
+4. El servidor se reinicia automáticamente con cambios en el código
 
 ---
 
@@ -361,17 +467,25 @@ Para preguntas o problemas:
 ## 🎓 Aprendizaje
 
 Este proyecto es ideal para aprender:
-- Manipulación del DOM
-- LocalStorage
-- Drag and Drop API
-- CSS Grid y Flexbox
-- Variables CSS
-- JSDoc
-- ES6+ features
+- **Spring Boot**: Framework web Java
+- **Spring Data JPA**: ORM y acceso a datos
+- **REST APIs**: Diseño y consumo de APIs
+- **Arquitectura en capas**: Controller → Service → Repository
+- **DTOs**: Data Transfer Objects
+- **CORS**: Seguridad en requests cross-origin
+- **MySQL**: Diseño de bases de datos relacionales
+- **Frontend Integration**: Consumo de APIs desde JavaScript
+
+### Recursos Recomendados
+- [Spring Boot Documentation](https://spring.io/projects/spring-boot)
+- [Spring Data JPA Guide](https://spring.io/projects/spring-data-jpa)
+- [RESTful Web Services](https://restfulapi.net/)
 
 ---
 
-**¡Disfruta organizando tus tareas! 🚀**
+**¡Disfruta desarrollando! 🚀**
 
 *Última actualización: Febrero 2026*
+
+
 
