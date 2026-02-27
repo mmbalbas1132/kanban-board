@@ -451,7 +451,7 @@ Este proyecto es de código abierto y está disponible para uso personal y educa
 
 ## 👨‍💻 Autor
 
-Desarrollado con ❤️ usando GitHub Copilot
+Desarrollado por Manuel Balbás con ❤️ usando GitHub Copilot
 
 ---
 
